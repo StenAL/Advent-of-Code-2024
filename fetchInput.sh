@@ -8,6 +8,12 @@ if [[ $# -eq 0 ]]; then
 fi
 DAY=$1
 
+if [[ ! -e cookie.txt ]]; then
+  echo "missing cookie.txt";
+  echo "it can be found from https://adventofcode.com/ as the 'session' cookie";
+  exit 1;
+fi
+
 INPUT_FILE="src/input/day$DAY.txt"
 if [[ ! -f $INPUT_FILE ]]; then
   YEAR=$(date +%Y)
