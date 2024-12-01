@@ -1,11 +1,12 @@
 set -euo pipefail
 
-DAY=$1
-if [[ -z "$1" ]]; then
+
+if [[ $# -eq 0 ]]; then
   echo "missing argument for day"
   echo "usage: ./fetchInput DAY"
   exit 1;
 fi
+DAY=$1
 
 INPUT_FILE="src/input/day$DAY.txt"
 if [[ ! -f $INPUT_FILE ]]; then
