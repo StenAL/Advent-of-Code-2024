@@ -17,7 +17,7 @@ fi
 INPUT_FILE="src/input/day$DAY.txt"
 if [[ ! -f $INPUT_FILE ]]; then
   YEAR=$(date +%Y)
-  curl -sS --cookie "session=$(cat cookie.txt)" "https://adventofcode.com/$YEAR/day/$DAY/input" -o $INPUT_FILE
+  curl -sS --create-dirs --cookie "session=$(cat cookie.txt)" "https://adventofcode.com/$YEAR/day/$DAY/input" -o $INPUT_FILE
   echo "Fetched $INPUT_FILE"
   git add $INPUT_FILE
 else
