@@ -9,6 +9,13 @@ def get_int_input_for_day(day: int) -> list[int]:
     f = open("input/day" + str(day) + ".txt")
     return [int(line.strip()) for line in f.readlines()]
 
+def get_grouped_input_for_day(day: int) -> list[list[str]]:
+    f = open("input/day" + str(day) + ".txt")
+    return [[line.strip() for line in group.split()] for group in f.read().split("\n\n")]
+
+def get_grouped_input_for_file(file: str) -> list[list[str]]:
+    f = open("input/" + file + ".txt")
+    return [[line.strip() for line in group.split()] for group in f.read().split("\n\n")]
 
 def get_input_for_file(file: str, delim=None) -> list[str]:
     f = open("input/" + file + ".txt")
