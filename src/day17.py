@@ -6,6 +6,7 @@ from math import prod
 
 day = 17
 
+
 def get_combo_operand(operand, a, b, c) -> int:
     if 0 <= operand <= 3:
         return operand
@@ -93,7 +94,7 @@ def task2():
     # 8. (3,0) if a == 0 terminate, otherwise loop to start
     # each cycle, a gets divided by 8 => program length is 16, minimum value for a is 8 ** 16
     # each cycle, b = (a % 8) ^ 7 ^ 7 ^ c and c = a / 2 ** b = a / 2 ** ((a % 8) ^ 7)
-    # b = (a % 8) ^ c 
+    # b = (a % 8) ^ c
     # c = a / 2 ** (7 - (a % 8))
     desired = program[::-1]
     start = 0
@@ -104,7 +105,7 @@ def task2():
         i = start
         # print(f"looking for {digits} digits ({desired[:digits][::-1]}) starting at {start}")
         while True:
-            a = i 
+            a = i
             b = 0
             c = 0
             output = []

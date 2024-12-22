@@ -17,7 +17,7 @@ def task1():
         for x in range(len(data[y])):
             c = data[y][x]
             if c == "#":
-                obstacles.add((x, y)) 
+                obstacles.add((x, y))
             elif c == "^":
                 position = (x, y)
 
@@ -53,7 +53,7 @@ def task2():
         for x in range(len(data[y])):
             c = data[y][x]
             if c == "#":
-                obstacles.add((x, y)) 
+                obstacles.add((x, y))
             elif c == "^":
                 initial_position = (x, y)
 
@@ -63,7 +63,7 @@ def task2():
 
     for y_obstacle in range(l):
         for x_obstacle in range(len(data[y_obstacle])):
-            if ((x_obstacle, y_obstacle) == initial_position):
+            if (x_obstacle, y_obstacle) == initial_position:
                 continue
             new_obstacles = obstacles.union({(x_obstacle, y_obstacle)})
             position = initial_position

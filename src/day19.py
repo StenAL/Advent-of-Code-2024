@@ -6,6 +6,7 @@ from math import prod
 
 day = 19
 
+
 @cache
 def construct(pattern, carpets):
     if len(pattern) == 0:
@@ -40,6 +41,7 @@ def construct2(pattern, carpets):
         if pattern.startswith(carpet):
             attempts.append(construct2(pattern.removeprefix(carpet), carpets))
     return sum(attempts)
+
 
 def task2():
     data = get_grouped_input_for_day(day)

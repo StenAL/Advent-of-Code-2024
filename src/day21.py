@@ -7,14 +7,19 @@ from collections.abc import Sequence, Collection
 
 day = 21
 
+
 def get_neighbors_grid(tile: tuple[int, int], tiles: Collection[tuple[int, int]]):
     deltas = {"^": (0, -1), ">": (1, 0), "v": (0, 1), "<": (-1, 0)}
     x, y = tile
-    neighbors = {k: n for k, v in deltas.items() if (n := (x + v[0], y + v[1])) in tiles}
+    neighbors = {
+        k: n for k, v in deltas.items() if (n := (x + v[0], y + v[1])) in tiles
+    }
     return neighbors
 
 
-def get_neighbors(state: tuple[str, ...], arrows_grid_neighbors, numbers_grid_neighbors, memo):
+def get_neighbors(
+    state: tuple[str, ...], arrows_grid_neighbors, numbers_grid_neighbors, memo
+):
     if state in memo:
         return memo[state]
     neighbors = set()
@@ -38,17 +43,22 @@ def get_neighbors(state: tuple[str, ...], arrows_grid_neighbors, numbers_grid_ne
         else:
             if state[i] in numbers_grid_neighbors[state[i + 1]]:
                 new_element = numbers_grid_neighbors[state[i + 1]][state[i]]
-        new_state = state[:i + 1] + (new_element,) + state[i + 2:]
+        new_state = state[: i + 1] + (new_element,) + state[i + 2 :]
         neighbors.add(new_state)
 
         # if s2 == "A" and s3 != "A" and s3 in numbers_grid_neighbors[s4]:
-            # neighbors.add((s2, s3, numbers_grid_neighbors[s4][s3]))
+        # neighbors.add((s2, s3, numbers_grid_neighbors[s4][s3]))
 
     memo[state] = neighbors
     return neighbors
 
 
-def get_steps(state: tuple[str, ...], target: tuple[str, ...], arrows_grid_neighbors, numbers_grid_neighbors) -> int:
+def get_steps(
+    state: tuple[str, ...],
+    target: tuple[str, ...],
+    arrows_grid_neighbors,
+    numbers_grid_neighbors,
+) -> int:
     q = [(0, state)]
     seen = set()
     memo = {}
@@ -63,16 +73,26 @@ def get_steps(state: tuple[str, ...], target: tuple[str, ...], arrows_grid_neigh
         q.extend([(cost + 1, n) for n in ns if n not in seen])
 
     raise Exception("impossible state")
-    
+
 
 def task1():
     data = get_input_for_day(day)
     # data = get_input_for_file("test")
     numbers_grid_data = ["789", "456", "123", "#0A"]
-    numbers_grid = {(x, y): c for (y, line) in enumerate(numbers_grid_data) for (x, c) in enumerate(line) if c != "#"}
+    numbers_grid = {
+        (x, y): c
+        for (y, line) in enumerate(numbers_grid_data)
+        for (x, c) in enumerate(line)
+        if c != "#"
+    }
 
     arrows_grid_data = ["#^A", "<v>"]
-    arrows_grid = {(x, y): c for (y, line) in enumerate(arrows_grid_data) for (x, c) in enumerate(line) if c != "#"}
+    arrows_grid = {
+        (x, y): c
+        for (y, line) in enumerate(arrows_grid_data)
+        for (x, c) in enumerate(line)
+        if c != "#"
+    }
 
     numbers_grid_neighbors = {}
     for k, v in numbers_grid.items():
@@ -83,7 +103,6 @@ def task1():
     for k, v in arrows_grid.items():
         ns = get_neighbors_grid(k, arrows_grid)
         arrows_grid_neighbors[v] = {dir: arrows_grid[v] for dir, v in ns.items()}
-
 
     # print(numbers_grid_neighbors)
     # print(arrows_grid_neighbors)
@@ -96,7 +115,9 @@ def task1():
         for c in code:
             target = ("A",) * (robots - 1) + (c,)
             # get to number
-            steps += get_steps(state, target, arrows_grid_neighbors, numbers_grid_neighbors)
+            steps += get_steps(
+                state, target, arrows_grid_neighbors, numbers_grid_neighbors
+            )
             # press A
             steps += 1
 
@@ -150,28 +171,40 @@ def get_steps2(robots: int, state: tuple[str, ...], target: str, presses: int):
     else:
         # try both orders and use best
         new_target = ">" if dx > 0 else "<"
-        state_horizontal_first, moves_horizontal_first = get_steps2(robots, state[:-1], new_target, abs(dx))
+        state_horizontal_first, moves_horizontal_first = get_steps2(
+            robots, state[:-1], new_target, abs(dx)
+        )
         state_horizontal_first += (target,)
 
         new_target = "v" if dy > 0 else "^"
-        state_horizontal_first, moves = get_steps2(robots, state_horizontal_first[:-1], new_target, abs(dy))
+        state_horizontal_first, moves = get_steps2(
+            robots, state_horizontal_first[:-1], new_target, abs(dy)
+        )
         state_horizontal_first += (target,)
         moves_horizontal_first += moves
 
-        state_horizontal_first, moves = get_steps2(robots, state_horizontal_first[:-1], "A", presses)
+        state_horizontal_first, moves = get_steps2(
+            robots, state_horizontal_first[:-1], "A", presses
+        )
         state_horizontal_first += (target,)
         total_moves_horizontal_first = total_moves + moves_horizontal_first + moves
 
         new_target = "v" if dy > 0 else "^"
-        state_vertical_first, moves_vertical_first = get_steps2(robots, state[:-1], new_target, abs(dy))
+        state_vertical_first, moves_vertical_first = get_steps2(
+            robots, state[:-1], new_target, abs(dy)
+        )
         state_vertical_first += (target,)
 
         new_target = ">" if dx > 0 else "<"
-        state_vertical_first, moves = get_steps2(robots, state_vertical_first[:-1], new_target, abs(dx))
+        state_vertical_first, moves = get_steps2(
+            robots, state_vertical_first[:-1], new_target, abs(dx)
+        )
         state_vertical_first += (target,)
         moves_vertical_first += moves
 
-        state_vertical_first, moves = get_steps2(robots, state_vertical_first[:-1], "A", presses)
+        state_vertical_first, moves = get_steps2(
+            robots, state_vertical_first[:-1], "A", presses
+        )
         state_vertical_first += (target,)
         total_moves_vertical_first = total_moves + moves_vertical_first + moves
 
@@ -185,13 +218,25 @@ def get_steps2(robots: int, state: tuple[str, ...], target: str, presses: int):
     total_moves += moves
     return state, total_moves
 
+
 numbers_grid_data = ["789", "456", "123", "#0A"]
-numbers_grid = {(x, y): c for (y, line) in enumerate(numbers_grid_data) for (x, c) in enumerate(line) if c != "#"}
+numbers_grid = {
+    (x, y): c
+    for (y, line) in enumerate(numbers_grid_data)
+    for (x, c) in enumerate(line)
+    if c != "#"
+}
 
 arrows_grid_data = ["#^A", "<v>"]
-arrows_grid = {(x, y): c for (y, line) in enumerate(arrows_grid_data) for (x, c) in enumerate(line) if c != "#"}
+arrows_grid = {
+    (x, y): c
+    for (y, line) in enumerate(arrows_grid_data)
+    for (x, c) in enumerate(line)
+    if c != "#"
+}
 numbers_grid_rev = {c: (x, y) for (x, y), c in numbers_grid.items()}
 arrows_grid_rev = {c: (x, y) for (x, y), c in arrows_grid.items()}
+
 
 def task2():
     data = get_input_for_day(day)

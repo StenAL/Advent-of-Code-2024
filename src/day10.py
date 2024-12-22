@@ -10,9 +10,13 @@ day = 10
 def get_neighbors(p, points):
     deltas = [(0, -1), (1, 0), (0, 1), (-1, 0)]
     x, y, v = p
-    neighbors = {(x + dx, y + dy, v + 1) for dx, dy in deltas if (x + dx, y + dy) in points and points[(x + dx, y + dy)] == v + 1}
+    neighbors = {
+        (x + dx, y + dy, v + 1)
+        for dx, dy in deltas
+        if (x + dx, y + dy) in points and points[(x + dx, y + dy)] == v + 1
+    }
     return neighbors
-    
+
 
 def task1():
     data = get_input_for_day(day)
@@ -25,7 +29,7 @@ def task1():
                 starts.add((x, y, 0))
             else:
                 points[(x, y)] = int(n)
-    
+
     ans = 0
     for start in starts:
         reachable_tops = 0
@@ -54,7 +58,7 @@ def task2():
                 starts.add((x, y, 0))
             else:
                 points[(x, y)] = int(n)
-    
+
     ans = 0
     for start in starts:
         ratings = defaultdict(int)
@@ -77,6 +81,7 @@ def task2():
         ans += reachable_tops
     print(ans)
     return ans
+
 
 task1()
 task2()

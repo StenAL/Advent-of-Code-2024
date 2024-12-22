@@ -9,7 +9,7 @@ day = 2
 
 def task1():
     data = get_input_for_day(day)
-    #data = get_input_for_file("test")
+    # data = get_input_for_file("test")
     data = [[int(e) for e in line.split()] for line in data]
     ans = 0
     for line in data:
@@ -19,9 +19,9 @@ def task1():
             e2 = line[i]
             d = e2 - e1
             deltas.append(d)
-        if set(deltas) - {1,2,3} == set():
+        if set(deltas) - {1, 2, 3} == set():
             ans += 1
-        if set(deltas) - {-1,-2,-3} == set():
+        if set(deltas) - {-1, -2, -3} == set():
             ans += 1
     print(ans)
     return ans
@@ -29,13 +29,13 @@ def task1():
 
 def task2():
     data = get_input_for_day(day)
-    #data = get_input_for_file("test")
+    # data = get_input_for_file("test")
     data = [[int(e) for e in line.split()] for line in data]
     ans = 0
     for line in data:
         potential_deltas = []
         for i in range(len(line)):
-            new_line = line[:i] + line[i + 1:]
+            new_line = line[:i] + line[i + 1 :]
             deltas = []
             for j in range(1, len(new_line)):
                 e1 = new_line[j - 1]
@@ -45,11 +45,12 @@ def task2():
             potential_deltas.append(deltas)
 
         for delta in potential_deltas:
-            if set(delta) - {1,2,3} == set() or set(delta) - {-1,-2,-3} == set():
+            if set(delta) - {1, 2, 3} == set() or set(delta) - {-1, -2, -3} == set():
                 ans += 1
                 break
     print(ans)
     return ans
+
 
 task1()
 task2()

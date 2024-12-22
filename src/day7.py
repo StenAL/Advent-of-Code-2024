@@ -6,6 +6,7 @@ from math import prod
 
 day = 7
 
+
 def get_sums(acc, components):
     if len(components) == 0:
         return {acc}
@@ -14,7 +15,6 @@ def get_sums(acc, components):
     added = get_sums(acc + next, rest)
     mult = get_sums(acc * next, rest)
     return added.union(mult)
-
 
 
 def task1():
@@ -67,7 +67,8 @@ def task2():
     print(ans)
     return ans
 
+
 # task1()
-task2() # 348360612577977 too low
-        # 348360680517522 too high
-        # 348360680517522 ?
+task2()  # 348360612577977 too low
+# 348360680517522 too high
+# 348360680517522 ?

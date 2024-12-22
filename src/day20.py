@@ -7,17 +7,24 @@ import heapq
 
 day = 20
 
+
 def get_neighbors(tile, tiles):
     deltas = [(0, -1), (1, 0), (0, 1), (-1, 0)]
     x, y = tile
-    neighbors = tuple(n for delta in deltas if (n := (x + delta[0], y + delta[1])) in tiles)
+    neighbors = tuple(
+        n for delta in deltas if (n := (x + delta[0], y + delta[1])) in tiles
+    )
     return neighbors
+
 
 def get_cheats(tile, tiles):
     deltas = [(0, -2), (2, 0), (0, 2), (-2, 0)]
     x, y = tile
-    cheats = tuple(n for delta in deltas if (n := (x + delta[0], y + delta[1])) in tiles)
+    cheats = tuple(
+        n for delta in deltas if (n := (x + delta[0], y + delta[1])) in tiles
+    )
     return cheats
+
 
 def djikstra(start, neighbors, edges):
     dist = {}
@@ -83,6 +90,7 @@ def task1():
     print(ans)
     return ans
 
+
 @cache
 def get_deltas():
     deltas = set()
@@ -95,7 +103,9 @@ def get_deltas():
 def get_cheats2(tile, tiles):
     deltas = get_deltas()
     x, y = tile
-    cheats = tuple(n for delta in deltas if (n := (x + delta[0], y + delta[1])) in tiles)
+    cheats = tuple(
+        n for delta in deltas if (n := (x + delta[0], y + delta[1])) in tiles
+    )
     return cheats
 
 
@@ -142,6 +152,7 @@ def task2():
     ans = sum(v for k, v in savings.items() if k >= 100)
     print(ans)
     return ans
+
 
 task1()
 task2()

@@ -6,10 +6,12 @@ from math import prod
 
 day = 12
 
+
 def get_neighbors(p, grid):
     deltas = [(0, -1), (1, 0), (0, 1), (-1, 0)]
     points = map(lambda d: (p[0] + d[0], p[1] + d[1]), deltas)
     return {point for point in points if grid[p] == grid[point]}
+
 
 def task1():
     data = get_input_for_day(day)
@@ -17,7 +19,7 @@ def task1():
     grid = defaultdict(str)
     for y, line in enumerate(data):
         for x, c in enumerate(line):
-            grid[(x,y)] = c
+            grid[(x, y)] = c
     regions = []
     seen = set()
     points = [p for p in grid.keys()]
@@ -33,7 +35,6 @@ def task1():
             region.update(neighbors)
             q.extend(n for n in neighbors if n not in seen)
         regions.append(region)
-
 
     ans = 0
     for region in regions:
@@ -54,7 +55,7 @@ def task2():
     grid = defaultdict(str)
     for y, line in enumerate(data):
         for x, c in enumerate(line):
-            grid[(x,y)] = c
+            grid[(x, y)] = c
     regions = []
     seen = set()
     points = [p for p in grid.keys()]
@@ -71,7 +72,6 @@ def task2():
             q.extend(n for n in neighbors if n not in seen)
         regions.append(region)
 
-
     ans = 0
     for region in regions:
         area = len(region)
@@ -82,18 +82,23 @@ def task2():
         downs = defaultdict(list)
         for p in region:
             if (right := (p[0] + 1, p[1])) not in get_neighbors(p, grid):
-               rights[right[0]].append(right[1]) 
+                rights[right[0]].append(right[1])
             if (left := (p[0] - 1, p[1])) not in get_neighbors(p, grid):
-               lefts[left[0]].append(left[1]) 
+                lefts[left[0]].append(left[1])
             if (up := (p[0], p[1] - 1)) not in get_neighbors(p, grid):
-               ups[up[1]].append(up[0]) 
+                ups[up[1]].append(up[0])
             if (down := (p[0], p[1] + 1)) not in get_neighbors(p, grid):
-               downs[down[1]].append(down[0]) 
+                downs[down[1]].append(down[0])
         # print("right", rights)
         # print("left", lefts)
         # print("up", ups)
         # print("down", downs)
-        perimeter = list(ups.values()) + list(downs.values()) + list(lefts.values()) + list(rights.values())
+        perimeter = (
+            list(ups.values())
+            + list(downs.values())
+            + list(lefts.values())
+            + list(rights.values())
+        )
         edges = len(perimeter)
         for v in perimeter:
             v = sorted(v)
@@ -104,6 +109,7 @@ def task2():
         ans += cost
     print(ans)
     return ans
+
 
 task1()
 task2()

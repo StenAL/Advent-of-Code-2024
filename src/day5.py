@@ -9,7 +9,7 @@ day = 5
 
 def task1():
     data = get_grouped_input_for_day(day)
-    #data = get_grouped_input_for_file("test")
+    # data = get_grouped_input_for_file("test")
     rules, manuals = data
     needs = defaultdict(set)
     needed_by = defaultdict(set)
@@ -35,7 +35,6 @@ def task1():
     ans += sum(l[len(l) // 2] for l in valid_manuals)
     print(ans)
     return ans
-
 
 
 def task2():
@@ -75,6 +74,7 @@ def task2():
     ans += sum(l[len(l) // 2] for l in valid_manuals)
     print(ans)
     return ans
+
 
 task1()
 task2()

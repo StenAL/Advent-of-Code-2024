@@ -30,7 +30,9 @@ def task1():
                 p2 = x1 - dx, y1 - dy
                 antinodes.add(p1)
                 antinodes.add(p2)
-    antinodes = {p for p in antinodes if 0 <= p[0] < len(data) and 0 <= p[1] < len(data)}
+    antinodes = {
+        p for p in antinodes if 0 <= p[0] < len(data) and 0 <= p[1] < len(data)
+    }
     ans = len(antinodes)
     print(ans)
     return ans

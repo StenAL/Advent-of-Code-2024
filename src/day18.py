@@ -6,11 +6,15 @@ from math import prod
 
 day = 18
 
+
 def get_neighbors(p, x_max, y_max, corrupted):
     deltas = [(0, -1), (1, 0), (0, 1), (-1, 0)]
-    neighbors = [n for d in deltas if (n := (p[0] + d[0], p[1] + d[1])) not in corrupted]
+    neighbors = [
+        n for d in deltas if (n := (p[0] + d[0], p[1] + d[1])) not in corrupted
+    ]
     neighbors = [n for n in neighbors if 0 <= n[0] <= x_max and 0 <= n[1] <= y_max]
     return neighbors
+
 
 def task1():
     data = get_input_for_day(day)
@@ -33,8 +37,6 @@ def task1():
     ans = steps
     print(ans)
     return ans
-
-
 
 
 def task2():

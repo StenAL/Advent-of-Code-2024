@@ -4,7 +4,7 @@ import copy
 from functools import reduce
 from math import prod
 
-day = 'REPLACE_ME'
+day = "REPLACE_ME"
 
 
 def task1():

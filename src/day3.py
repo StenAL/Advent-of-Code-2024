@@ -10,11 +10,11 @@ day = 3
 
 def task1():
     data = get_input_for_day(day)
-    #data = get_input_for_file("test")
+    # data = get_input_for_file("test")
 
     ans = 0
     for line in data:
-        matches = re.findall(r'mul\(\d+,\d+\)', line)
+        matches = re.findall(r"mul\(\d+,\d+\)", line)
         for match in matches:
             e1, e2 = match.strip("mul(").rstrip(")").split(",")
             ans += int(e1) * int(e2)
@@ -24,13 +24,13 @@ def task1():
 
 def task2():
     data = get_input_for_day(day)
-    #data = get_input_for_file("test")
+    # data = get_input_for_file("test")
 
     ans = 0
     enabled = True
 
     for line in data:
-        matches = re.findall(r'mul\(\d+,\d+\)|don\'t\(\)|do\(\)', line)
+        matches = re.findall(r"mul\(\d+,\d+\)|don\'t\(\)|do\(\)", line)
         for match in matches:
             if match == "do()":
                 enabled = True

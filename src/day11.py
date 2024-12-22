@@ -22,8 +22,8 @@ def task1():
             str_stone = str(stone)
             str_len = len(str_stone)
             if str_len % 2 == 0:
-                new_stones.append(int(str_stone[:str_len // 2]))
-                new_stones.append(int(str_stone[str_len // 2:]))
+                new_stones.append(int(str_stone[: str_len // 2]))
+                new_stones.append(int(str_stone[str_len // 2 :]))
             else:
                 new_stones.append(stone * 2024)
         stones = new_stones
@@ -47,8 +47,8 @@ def task2():
             str_stone = str(stone)
             str_len = len(str_stone)
             if str_len % 2 == 0:
-                new_stones[(int(str_stone[:str_len // 2]))] += v
-                new_stones[(int(str_stone[str_len // 2:]))] += v
+                new_stones[(int(str_stone[: str_len // 2]))] += v
+                new_stones[(int(str_stone[str_len // 2 :]))] += v
             else:
                 new_stones[stone * 2024] += v
         stones = new_stones

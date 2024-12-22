@@ -13,7 +13,10 @@ def task1():
     # data = get_input_for_file("test2")
 
     l = len(data)
-    rotated = ["".join([data[l - 1 - y][x] for y in range(len(data))]) for x in range(len(data[0]))]
+    rotated = [
+        "".join([data[l - 1 - y][x] for y in range(len(data))])
+        for x in range(len(data[0]))
+    ]
 
     diagonals = []
     first_iteration = True
@@ -50,7 +53,6 @@ def task1():
     return ans
 
 
-
 def task2():
     data = get_input_for_day(day)
     # data = get_input_for_file("test")
@@ -62,14 +64,13 @@ def task2():
         for x in range(l):
             if x == 0 or x == l - 1 or y == 0 or y == l - 1:
                 continue
-            diag1 = data[y-1][x-1] + data[y][x] + data[y+1][x+1]
-            diag2 = data[y-1][x+1] + data[y][x] + data[y+1][x-1]
+            diag1 = data[y - 1][x - 1] + data[y][x] + data[y + 1][x + 1]
+            diag2 = data[y - 1][x + 1] + data[y][x] + data[y + 1][x - 1]
             targets = ["MAS", "SAM"]
             if diag1 in targets and diag2 in targets:
                 ans += 1
     print(ans)
     return ans
-
 
 
 task1()

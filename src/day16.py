@@ -7,6 +7,7 @@ import heapq
 
 day = 16
 
+
 def get_neighbors(tile, tiles):
     deltas = {"u": (0, -1), "r": (1, 0), "d": (0, 1), "l": (-1, 0)}
     dirs = ["u", "r", "d", "l"]
@@ -20,6 +21,7 @@ def get_neighbors(tile, tiles):
     neighbors.add((x, y, clockwise, 1000))
     neighbors.add((x, y, counter_clockwise, 1000))
     return neighbors
+
 
 def task1():
     data = get_input_for_day(day)
@@ -43,7 +45,6 @@ def task1():
     for tile in tiles:
         for dir in dirs:
             dist[(tile[0], tile[1], dir)] = 100000000
-
 
     start = (start[0], start[1], "r")
     dist[start] = 0
@@ -86,7 +87,6 @@ def task2():
         for dir in dirs:
             dist[(tile[0], tile[1], dir)] = 100000000
 
-
     start = (start[0], start[1], "r")
     dist[start] = 0
     q = []
@@ -100,7 +100,7 @@ def task2():
             if d < dist[(n_x, n_y, n_d)]:
                 dist[(n_x, n_y, n_d)] = d
                 heapq.heappush(q, (d, (n_x, n_y, n_d)))
-                prev[(n_x, n_y, n_d)] = { u }
+                prev[(n_x, n_y, n_d)] = {u}
             elif d == dist[(n_x, n_y, n_d)]:
                 prev[(n_x, n_y, n_d)].add(u)
 

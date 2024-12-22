@@ -6,11 +6,14 @@ from math import prod
 
 day = 22
 
+
 def mix(secret, n):
     return secret ^ n
 
+
 def prune(n):
     return n % 16777216
+
 
 def task1():
     data = get_int_input_for_day(day)
@@ -31,7 +34,6 @@ def task1():
     ans = sum(secrets)
     print(ans)
     return ans
-            
 
 
 def task2():
@@ -58,7 +60,7 @@ def task2():
                 continue
             seen_sequences.add(s)
             delta_sequence_earnings[s] += prices[i + 1]
-            
+
     most_bananas = max(delta_sequence_earnings.values())
     ans = most_bananas
     print(ans)

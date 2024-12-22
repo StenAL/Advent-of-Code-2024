@@ -36,7 +36,7 @@ def task1():
                 break
             elif current in boxes:
                 moved_boxes.add(current)
-            else: # free space
+            else:  # free space
                 should_move = True
                 break
         if should_move:
@@ -45,20 +45,21 @@ def task1():
             robot = (x + d[0], y + d[1])
             # print(instruction, "move to", robot)
         # else:
-            # print(instruction, "stay")
+        # print(instruction, "stay")
     coords = [b[0] + b[1] * 100 for b in boxes]
     ans = sum(coords)
     print(ans)
     return ans
 
 
-
-
 def task2():
     data = get_grouped_input_for_day(day)
     # data = get_grouped_input_for_file("test")
     grid, instructions = data
-    grid = [l.replace("#", "##").replace("O", "[]").replace(".", "..").replace("@", "@.") for l in grid]
+    grid = [
+        l.replace("#", "##").replace("O", "[]").replace(".", "..").replace("@", "@.")
+        for l in grid
+    ]
     robot = (-1, -1)
     boxes = set()
     box_to_squares = defaultdict(set)
@@ -97,7 +98,7 @@ def task2():
                 squares = box_to_squares[current]
                 moved_boxes.update(squares)
                 q.extend(squares)
-            else: # free space
+            else:  # free space
                 continue
         if should_move:
             removed = set()
@@ -121,7 +122,7 @@ def task2():
             # print(instruction, "move to", robot)
             # print(f">> remove {removed}, add {added}")
         # else:
-            # print(instruction, "stay")
+        # print(instruction, "stay")
     ans = 0
     top_lefts = set()
     for squares in box_to_squares.values():

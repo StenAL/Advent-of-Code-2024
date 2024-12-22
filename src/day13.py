@@ -6,8 +6,9 @@ from math import prod
 
 day = 13
 
+
 @cache
-def get_tokens(a, b, target, presses = (0, 0)):
+def get_tokens(a, b, target, presses=(0, 0)):
     if target[0] == 0 and target[1] == 0:
         return 0
     if target[0] < 0 or target[1] < 0:
@@ -54,7 +55,9 @@ def task2():
         a, b, target = group
         a_x, a_y = tuple(int(e) for e in a.split(": X+")[1].split(", Y+"))
         b_x, b_y = tuple(int(e) for e in b.split(": X+")[1].split(", Y+"))
-        target_x, target_y = tuple(int(e) + offset for e in target.split(": X=")[1].split(", Y="))
+        target_x, target_y = tuple(
+            int(e) + offset for e in target.split(": X=")[1].split(", Y=")
+        )
         # a_x*a + b_x * b = target_x  ==> a = (target_x - b_x * b) / a_x
         # a_y*a + b_y * b = target_y  ==> a = (target_y - b_y * b) / a_y
         #
@@ -72,6 +75,7 @@ def task2():
 
     print(ans)
     return ans
+
 
 task1()
 task2()
