@@ -27,7 +27,7 @@ fi
 SOURCE_FILE="src/day$DAY.py"
 if [[ ! -f $SOURCE_FILE ]]; then
   cp src/skeleton.py src/day$DAY.py
-  sed -i "s/'REPLACE_ME'/$DAY/g" src/day$DAY.py
+  sed -i "s/\"REPLACE_ME\"/$DAY/g" src/day$DAY.py
   echo "Created $SOURCE_FILE"
   git add $SOURCE_FILE
 else
